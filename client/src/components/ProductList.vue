@@ -6,12 +6,14 @@
             <th>Price</th>
             <th>Description</th>
             <th>Type</th>
+            <th>action</th>
         </thead>
         <tr v-for="product in products" :key="product._id">
           <td>{{ product.name }}</td>
           <td>{{ product.price }}</td>
           <td>{{ product.description }}</td>
           <td>{{ product.type }}</td>
+          <td><button>edit</button></td>
         </tr>
       </table>
     </div>
