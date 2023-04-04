@@ -2,8 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 mb-3" v-for="product in products" :key="product.id">
-        <div class="card">
-          <img :src="'http://localhost:8080/uploads/' + product.photo.split('/').pop()" class="logo" alt="product">
+        <div class="card h-100">
+          <div class="card-img-top" :style="{ height: '66%'}">
+            <img :src="'http://localhost:8080/uploads/' + product.photo.split('/').pop()" class="product-image h-100" alt="product">
+          </div>
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description }}</p>
@@ -35,6 +37,14 @@
     </div>
   </div>
 </template>
+
+<style>
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
 
 <script>
 import axios from 'axios'
