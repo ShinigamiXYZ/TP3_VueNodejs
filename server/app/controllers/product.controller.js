@@ -13,14 +13,17 @@ exports.myFindAll = (req, res) => {
         })
     })
 }
+
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'public/uploads/') // Destination folder for uploaded files
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname) // Unique filename for uploaded file
-    }
-  })
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 exports.myFindOne = (req, res) => {
     const id = req.params.id
@@ -36,24 +39,43 @@ exports.myFindOne = (req, res) => {
 }
 
 exports.myCreate = (req, res) => {
-    // console.log(req.body)
-    if(!req.body.name) {
-        res.status(400).send({
-            message: 'The name is mandatory'
-        })
-        return;
-    }
+  console.log('File information:', req.file);
 
-    Product.create(req.body)
-        .then(data => {
-            res.send(data)
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: 'Could not insert the data'
-            })
-        })
-}
+  if (!req.body.name) {
+    res.status(400).send({
+      message: 'Name is required!',
+    });
+    return;
+  }
+
+  let photoPath = '';
+  if (req.file) {
+    photoPath = req.file.path;
+    console.log('Photo Path:', photoPath);
+  }
+
+  const product = {
+    name: req.body.name,
+    photo: photoPath,
+    price: req.body.price,
+    description: req.body.description,
+    type: req.body.type,
+    quantity: req.body.quantity,
+  };
+
+  console.log('product object: ', product);
+
+  Product.create(product)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: 'Could not insert the data',
+      });
+    });
+};
+
 
 exports.myDestroy = (req, res) => {
     const id = req.params.id

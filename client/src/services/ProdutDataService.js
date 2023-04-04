@@ -1,11 +1,16 @@
 import http from '../http-common'
+
 class ProductDataService {
-  getAll () {
-    return http.get('/product')
+  create (formData) {
+    return http.post('/product', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 
-  create (data) {
-    return http.post('/product', data)
+  getAll () {
+    return http.get('/product')
   }
 
   get (id) {
@@ -20,4 +25,5 @@ class ProductDataService {
     return http.put(`/product/${id}`, data)
   }
 }
+
 export default new ProductDataService()
