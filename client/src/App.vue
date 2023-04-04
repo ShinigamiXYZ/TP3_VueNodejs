@@ -1,10 +1,27 @@
 <template>
-  <nav>
-    <router-link to="/">add Product</router-link>
-    <router-link to="/catalogue">catalogue</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+      <div class="container d-flex justify-content-center">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Add Product</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/catalogue" class="nav-link">Catalogue</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  </div>
+    <router-view />
 </template>
+
+<style scoped>
+.bg-custom {
+  background-color: #172636;
+  background-image: linear-gradient(45deg, #172636 60%, #00ccff 100%);
+}
+</style>
 
 <script>
 import ProductDataService from '@/services/ProdutDataService'

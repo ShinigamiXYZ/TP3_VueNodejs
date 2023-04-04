@@ -12,5 +12,9 @@ module.exports = app => {
 
     router.put('/:id', product.myUpdate)
 
+    router.put('/:id/add', product.addQuantity);
+    
+    router.put('/:id/remove', product.removeQuantity);
+
     app.use('/api/product', router)
 }

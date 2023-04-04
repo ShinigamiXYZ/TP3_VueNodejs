@@ -10,3 +10,16 @@ Un menu de navigation entre les pages (Accueil / produits)
 Pour la conception (CSS), vous pouvez utiliser le framework bootstrap (vanille, aucun modèle autorisé) ou développer votre propre css.
 Un Server Node.JS
 Une base de données MySQL (nommée : tp_vue)
+
+
+
+----
+
+Logic directement en DB pour le delete when reach 0
+
+
+ALTER TABLE products
+ADD COLUMN quantity INT NOT NULL,
+ADD CONSTRAINT non_negative_quantity CHECK (quantity >= 0),
+ADD CONSTRAINT delete_when_quantity_zero
+    CHECK (quantity > 0 OR quantity IS NULL);
