@@ -56,9 +56,7 @@ export default {
   },
   methods: {
     onFileSelected (event) {
-      console.log('test')
       this.selectedFile = event.target.files[0]
-      console.log(this.selectedFile.name)
     },
     onSubmit () {
       console.log(this.selectedFile)
@@ -70,12 +68,6 @@ export default {
       formData.append('quantity', this.product.quantity)
       if (this.selectedFile) {
         formData.append('photo', this.selectedFile)
-      }
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1])
-        if (pair[0] === 'photo') {
-          console.log(pair[1].name)
-        }
       }
       ProductDataService.create(formData)
         .then(response => {

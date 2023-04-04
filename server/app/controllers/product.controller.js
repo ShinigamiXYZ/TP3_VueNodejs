@@ -39,8 +39,6 @@ exports.myFindOne = (req, res) => {
 }
 
 exports.myCreate = (req, res) => {
-  console.log('File information:', req.file);
-
   if (!req.body.name) {
     res.status(400).send({
       message: 'Name is required!',
@@ -51,7 +49,6 @@ exports.myCreate = (req, res) => {
   let photoPath = '';
   if (req.file) {
     photoPath = req.file.path;
-    console.log('Photo Path:', photoPath);
   }
 
   const product = {
@@ -62,8 +59,6 @@ exports.myCreate = (req, res) => {
     type: req.body.type,
     quantity: req.body.quantity,
   };
-
-  console.log('product object: ', product);
 
   Product.create(product)
     .then((data) => {
@@ -146,8 +141,6 @@ exports.addQuantity = (req, res) => {
   // Remove quantity
   exports.removeQuantity = (req, res) => {
     const id = req.params.id;
-
-    console.log(id);
   
     Product.findByPk(id)
       .then((product) => {
