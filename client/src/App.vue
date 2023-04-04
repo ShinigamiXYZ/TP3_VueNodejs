@@ -1,14 +1,17 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
-      <div class="container d-flex justify-content-center">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">Add Product</router-link>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-custom'>
+      <div class='container d-flex justify-content-center'>
+          <ul class='navbar-nav'>
+            <li class='nav-item'>
+              <router-link to='/' class='nav-link'>Add Product</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/catalogue" class="nav-link">Catalogue</router-link>
+            <li class='nav-item'>
+              <router-link to='/catalogue' class='nav-link'>Catalogue</router-link>
             </li>
+            <li class='nav-item' v-if='loggedIn'>
+            <a class='nav-link' @click='logout'>Logout</a>
+          </li>
           </ul>
         </div>
       </nav>
@@ -37,7 +40,15 @@ export default {
   },
   data () {
     return {
-      inventory: []
+      inventory: [],
+      loggedIn: !!localStorage.getItem('loggedIn')
+    }
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('loggedIn')
+      this.loggedIn = false
+      this.$router.push('/login')
     }
   }
 }
