@@ -174,33 +174,6 @@ exports.addQuantity = (req, res) => {
       });
   };
 
-  // Upload a photo for a product by ID
-exports.uploadPhoto = (req, res) => {
-    const id = req.params.id
-  
-    upload.single('photo')(req, res, (err) => {
-      if (err) {
-        res.status(400).send({ message: 'Error uploading file: ' + err.message })
-      } else {
-        const file = req.file
-        Product.findByPk(id)
-          .then((product) => {
-            if (!product) {
-              res.status(404).send({ message: 'Product not found with id: ' + id })
-            } else {
-              // Update the product with the uploaded photo filename
-              return product.update({ photo: file.filename })
-            }
-          })
-          .then((updatedProduct) => {
-            res.send(updatedProduct)
-          })
-          .catch((error) => {
-            res.status(500).send({ message: 'Error updating product with id: ' + id })
-          })
-      }
-    })
-};
   
   
 
