@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4 mb-3" v-for="product in products" :key="product.id">
         <div class="card">
-          <img src="../assets/logo.png" class="card-img-top" alt="Product Image" />
+          <img :src="'http://localhost:8080/uploads/' + product.photo.split('/').pop()" class="logo" alt="product">
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description }}</p>

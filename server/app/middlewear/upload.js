@@ -5,7 +5,9 @@ const storage = multer.diskStorage({
     cb(null, 'public/uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    // Replace backslashes with forward slashes
+    const sanitizedOriginalName = file.originalname.replace(/\\/g, '/');
+    cb(null, `${Date.now()}-${sanitizedOriginalName}`);
   },
 });
 

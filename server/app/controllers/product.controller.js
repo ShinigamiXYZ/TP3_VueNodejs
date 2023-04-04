@@ -56,7 +56,7 @@ exports.myCreate = (req, res) => {
 
   const product = {
     name: req.body.name,
-    photo: photoPath,
+    photo: photoPath.replace(/\\/g, '/'),
     price: req.body.price,
     description: req.body.description,
     type: req.body.type,
